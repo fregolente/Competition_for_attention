@@ -61,6 +61,7 @@ for counter in xrange(nn+1):
 	if probability_new_idea <= p:
 #################### Fitness ###################
 		meme_chosen = random.random() #fitness for the new meme
+		affectednodes = [select_one_node] + adj[select_one_node]
 #################### Fitness ###################
 	else:
 #################### selecionar um meme da lista ###################
@@ -68,7 +69,8 @@ for counter in xrange(nn+1):
 		temp = np.cumsum(nodememory[select_one_node, ])/sum(nodememory[select_one_node, ])
 		meme_idx = np.where(temp >= meme_probability)[0][0]
 		meme_chosen = nodememory[select_one_node, meme_idx] # selected meme
-	affectednodes = [select_one_node] + adj[select_one_node]
+		affectednodes = adj[select_one_node]
+	
 	temp = nodememory[affectednodes, :memory_size-1].copy()
 	lastmemes = set(nodememory[affectednodes, memory_size-1])
 	nodememory[affectednodes, 0] = meme_chosen
